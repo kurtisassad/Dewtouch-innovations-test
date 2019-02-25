@@ -8,6 +8,22 @@ class FileUploadController extends AppController {
 
 		if ($this->request->is('post')) {
 			$file = $this->request->data['FileUpload']['file']['tmp_name'];
+			$csvMimeTypes = array(
+			    'text/csv',
+			    'text/plain',
+			    'application/csv',
+			    'text/comma-separated-values',
+			    'application/excel',
+			    'application/vnd.ms-excel',
+			    'application/vnd.msexcel',
+			    'text/anytext',
+			    'application/octet-stream',
+			    'application/txt',
+			);
+			if(!in_array($this->request->data['FileUpload']['file']['type'],$csvMimeTypes)){
+				$this->setFlash('The file you tried to upload was not a csv file.');
+				return $this->redirect([]);
+			}
 			$file_data = array();
 			ini_set('auto_detect_line_endings', TRUE);
 			$row = 1;

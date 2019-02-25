@@ -84,7 +84,6 @@
 						// array_push($transactionData,$transactionRowData);
 
 					}
-					debug($transactionData);
 					$this->Member->saveMany($memberData);
 					$this->Member->saveMany($transactionData);
 					// $this->Member->saveMany($transactionItemData);

@@ -10,8 +10,8 @@
 <br><br>
 
 <?php $options_new = array(
- 		'Type1' => __('<span data-html="true" data-toggle="tooltip" data-placement="right" data-id="dialog_1" style="color:blue">Type1</span>'),
-		'Type2' => __('<span data-html="true" data-toggle="tooltip" data-placement="right" data-id="dialog_2" style="color:blue">Type2</span>')
+ 		'Type1' => __('<span data-html="true" data-toggle="popover" data-placement="right" data-id="dialog_1" style="color:blue">Type1</span>'),
+		'Type2' => __('<span data-html="true" data-toggle="popover" data-placement="right" data-id="dialog_2" style="color:blue">Type2</span>')
 		);?>
 
 <?php echo $this->Form->input('type', array('legend'=>false, 'type' => 'radio', 'options'=>$options_new,'before'=>'<label class="radio line notcheck">','after'=>'</label>' ,'separator'=>'</label><label class="radio line notcheck">'));?>
@@ -38,13 +38,6 @@
 	white-space: pre-wrap;
 }
 
-.tooltip > .tooltip-inner {
-	background-color: #FFF;
-  color: #000;
-  border: 1px solid black;
-  padding: 3px;
-}
-
 </style>
 
 <?php $this->start('script_own')?>
@@ -52,10 +45,10 @@
 
 $(document).ready(function(){
 
-	$("[data-id='dialog_1']").attr('title','<ul><li>Desc 1 .....</li><li>Desc 2...</li></ul>')
-	$("[data-id='dialog_2']").attr('title','<ul><li>Description .......</li><li>Description 2</li>')
+	$("[data-id='dialog_1']").attr('data-content','<ul><li>Desc 1 .....</li><li>Desc 2...</li></ul>')
+	$("[data-id='dialog_2']").attr('data-content','<ul><li>Description .......</li><li>Description 2</li>')
 
-	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="popover"]').popover({trigger: "hover"});
 })
 
 

@@ -21,7 +21,7 @@ Question: Advanced Input Field</div>
 <button class="close" data-dismiss="alert"></button>
 The table you start with</div>
 
-<table class="table table-striped table-bordered table-hover">
+<table id="mainTable" class="table table-striped table-bordered table-hover">
 <thead>
 <th><span id="add_item_button" class="btn mini green addbutton" onclick="addToObj=false">
 											<i class="icon-plus"></i></span></th>
@@ -33,12 +33,10 @@ The table you start with</div>
 <tbody>
 	<tr>
 	<td></td>
-	<td><textarea name="data[1][description]" class="m-wrap  description required" rows="2" ></textarea></td>
-	<td><input name="data[1][quantity]" class=""></td>
-	<td><input name="data[1][unit_price]"  class=""></td>
-	
-</tr>
-
+	<td><textarea name="data[1][description]" class="m-wrap description required editable" rows="2"></textarea><xmp></xmp></td>
+	<td><input name="data[1][quantity]" class="editable"><xmp></xmp></td>
+	<td><input name="data[1][unit_price]"  class="editable"><xmp></xmp></td>
+	</tr>
 </tbody>
 
 </table>
@@ -63,17 +61,35 @@ Your browser does not support the video tag.
 <?php $this->start('script_own');?>
 <script>
 $(document).ready(function(){
+	$('td').find('textarea, input').hide();
+	$(document).on('click','td',function(){
+		$(this).find('textarea, input').show().focus();
+		$(this).find('xmp').hide();
+	});
+	$(document).on('click','td',function(event){
+    event.stopPropagation();
+	});
+	$(document).on('focusout','td',function(){
+		var save = $(this).find('textarea, input').val();
+		$(this).find('xmp').text(save);
+		$(this).find('textarea, input').hide();
+		$(this).find('xmp').show();
+	});
 
+	var i = 1;
 	$("#add_item_button").click(function(){
+		i++;
+		$("#mainTable tr:last").after(' \
+		<tr> \
+			<td></td> \
+			<td><textarea name="data['+i+'][description]" class="m-wrap  description required editable" rows="2" ></textarea><xmp></xmp></td> \
+			<td><input name="data['+i+'][quantity]" class="editable"><xmp></xmp></td> \
+			<td><input name="data['+i+'][unit_price]"  class="editable"><xmp></xmp></td> \
+		</tr>');
+		$('td').find('textarea, input').hide();
+	});
 
 
-		alert("suppose to add a new row");
-		
-
-		});
-
-	
 });
 </script>
 <?php $this->end();?>
-

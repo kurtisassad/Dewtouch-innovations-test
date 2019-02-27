@@ -4,7 +4,7 @@
 			<tr>
 				<th style="width:10%">ID</th>
 				<th>NAME</th>
-				<th style="width:20%">Action (click to view order details)</th>		
+				<th style="width:20%">Action (click to view order details)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -13,7 +13,7 @@
 				<td style="width:10%"><?php echo $order['Order']['id']?></td>
 				<td><?php echo $order['Order']['name']?></td>
 				<td style="width:20%"><?php echo $this->Html->link('View Detail','/Order/view/'.$order['Order']['id'],array('target'=>'_blank'))?></td>
-			</tr>	
+			</tr>
 			<?php endforeach;?>
 		</tbody>
 	</table>
